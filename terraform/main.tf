@@ -6,9 +6,7 @@ terraform {
     }
     rabbitmq = {
       source  = "cyrilgdn/rabbitmq"
-      version = "~> 1.12.0" # Escolha a versão mais recente
+      version = "~> 1.8.0"
     }
   }
-  
-  required_version = ">= 1.3.0"
 }
