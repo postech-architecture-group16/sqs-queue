@@ -4,7 +4,7 @@ resource "aws_mq_broker" "rabbitmq_broker" {
   engine_version      = "3.11.20"
   host_instance_type  = "mq.t3.micro"
   deployment_mode     = "SINGLE_INSTANCE"
-  subnet_ids          = [module.vpc.public_subnets[0]]
+  subnet_ids = [aws_subnet.public_subnet[0].id]
   publicly_accessible = false
   configuration {
     id       = aws_mq_configuration.rabbitmq_broker_config.id
