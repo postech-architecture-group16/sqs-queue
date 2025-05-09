@@ -1,29 +1,44 @@
-resource "rabbitmq_queue" "order_payment" {
-  name = "order-payment"
-  vhost = "foo"
+resource "aws_sqs_queue" "order-payment" {
+  name                       = "order-payment"
+  visibility_timeout_seconds = 30
+  message_retention_seconds  = 86400
+  delay_seconds              = 0
+  max_message_size           = 262144
+  receive_wait_time_seconds  = 0
 
-  settings {
-    durable = true
-    auto_delete = false
-  }
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.order-payment-create-dlq.arn
+    maxReceiveCount     = 5
+  })
+
 }
 
-resource "rabbitmq_queue" "order_production" {
-  name = "order-production"
-  vhost = "foo"
+resource "aws_sqs_queue" "order-production" {
+  name                       = "order-production"
+  visibility_timeout_seconds = 30
+  message_retention_seconds  = 86400
+  delay_seconds              = 0
+  max_message_size           = 262144
+  receive_wait_time_seconds  = 0
 
-  settings {
-    durable = true
-    auto_delete = false
-  }
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.order-production-dlq.arn
+    maxReceiveCount     = 5
+  })
+
 }
 
-resource "rabbitmq_queue" "payment_order" {
-  name = "payment-order"
-  vhost = "foo"
+resource "aws_sqs_queue" "payment-order" {
+  name                       = "payment-order"
+  visibility_timeout_seconds = 30
+  message_retention_seconds  = 86400
+  delay_seconds              = 0
+  max_message_size           = 262144
+  receive_wait_time_seconds  = 0
 
-  settings {
-    durable = true
-    auto_delete = false
-  }
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.payment-order-dlq.arn
+    maxReceiveCount     = 5
+  })
+
 }
