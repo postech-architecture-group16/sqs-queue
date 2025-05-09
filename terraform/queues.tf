@@ -1,4 +1,4 @@
-resource "rabbitmq_queue" "order-payment" {
+resource "rabbitmq_queue" "order_payment" {
   name = "order-payment"
   vhost = "foo"
 
@@ -8,7 +8,7 @@ resource "rabbitmq_queue" "order-payment" {
   }
 }
 
-resource "rabbitmq_queue" "order-production" {
+resource "rabbitmq_queue" "order_production" {
   name = "order-production"
   vhost = "foo"
 
@@ -18,7 +18,7 @@ resource "rabbitmq_queue" "order-production" {
   }
 }
 
-resource "rabbitmq_queue" "payment-order" {
+resource "rabbitmq_queue" "payment_order" {
   name = "payment-order"
   vhost = "foo"
 
