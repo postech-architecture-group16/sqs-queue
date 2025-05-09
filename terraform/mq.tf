@@ -46,3 +46,8 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 }
+
+output "rabbitmq_broker_endpoint" {
+  value = aws_mq_broker.rabbitmq_broker.instances[0].endpoints[0]
+  description = "The endpoint of the RabbitMQ broker"
+}
